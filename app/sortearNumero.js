@@ -1,16 +1,36 @@
-const menorValor = 1;
-const maiorValor = 1000;
+function verificaSeOChutePossuiUmValorValido(chute) {
+    const numero = +chute
 
-const numeroSecreto =  gerarNumeroSecreto()
+    if (chuteForInvalido(numero)) {
+        elementoChute.innerHTML += <div>Valor inválido</div>
+    }
 
-function gerarNumeroSecreto() {
-    return parseInt(Math.random() * maiorValor + 1)
+    if (numeroForMaiorOUMenorQueOValorPermitido(numero)){
+    elementoChute.innerHTML +=`
+    <div>Valor inválido: fale um número entre ${menorValor} e ${maiorValor}</div>
+    `
+    }
+    
+    if (numero === numeroSecreto){
+       document.body.innerHTML =`
+           <h2>Você acertou!</h2>
+           <h3>O número secreto era ${numeroSecreto}</h3>
+    `
+}else if (numero > numeroSecreto){
+    elementoChute.innerHTML += `
+    <div>O número secreto é menor <i class="fa-solid fa-down-long"> <i/></div>
+    `
+}else {
+        elementoChute.innerHTML += `
+        <div>O número secreto é maior <i class="fa-solid fa-up-long"></i></div>
+        `
+}
 }
 
-console.log('Número Secreto:', numeroSecreto)
+function chuteForInvalido(numero) {
+    return Number.isNaN(numero)
+}
 
-const elementoMenorValor = document.getElementById('menor-valor') 
-elementoMenorValor.innerHTML = menorValor
-
-const elementoMaiorValor = document.getElementById('maior-valor')
-elementoMaiorValor.innerHTML = maiorValor
+function numeroForMaiorOUMenorQueOValorPermitido(numero){
+    return numero > maiorValor || numero < menorValor
+}
